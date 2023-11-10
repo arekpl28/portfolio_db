@@ -5,7 +5,6 @@ import api from "../api";
 export const DataContext = createContext();
 
 export const DataProvider = (props) => {
-  //Todo App
   const [inputText, setInputText] = useState("");
   const [todos, setTodos] = useState([]);
   const [status, setStatus] = useState("all");
@@ -51,20 +50,17 @@ useEffect(() => {
       setTodos(response.data);
     } catch (error) {
       console.error('Błąd podczas pobierania todos:', error);
-      setTodos([]); // Ustaw pustą tablicę, aby zapobiec błędom
+      setTodos([]);
     }
   };
 
   fetchTodos();
 }, []);
 
-  //ProjectPage set Header project name
   const [projectName, setProjectName] = useState("My_projects");
 
-  //Path name
   const [path, setPath] = useState("");
 
-  //Navigation
   const [navSticky, setNavSticky] = useState("");
   const [burgerActive, setBurgerAcive] = useState(false);
   const [viewportWidth, setViewportWidth] = useState();
@@ -73,7 +69,6 @@ useEffect(() => {
     setViewportWidth(window.innerWidth);
   });
 
-  //Scroll top
   const [showScroll, setShowScroll] = useState(false);
 
   useEffect(() => {
@@ -84,7 +79,6 @@ useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  //Translator
   const handleChangeLanguage = (lang) => {
     i18n.changeLanguage(lang);
   };
@@ -120,7 +114,6 @@ useEffect(() => {
     languaeFirst,
   };
 
-  // console.log(path);
   return (
     <>
       <DataContext.Provider value={defaultContext}>

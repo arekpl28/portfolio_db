@@ -2,17 +2,14 @@ const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
 require('dotenv').config();
-const path = require('path'); // Dodaj wymagany moduł 'path'
+const path = require('path'); 
 
 const app = express();
 
-// Middleware
 app.use(cors());
-app.use(express.json()); // Dla parsowania JSON w ciałach żądań
-// app.use(express.static('public'));
+app.use(express.json()); 
 app.use(express.static(path.join(__dirname, 'build')));
 
-// Połączenie z bazą danych
 const connection = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USERNAME,
@@ -57,7 +54,7 @@ app.get('/api/todos', (req, res) => {
   });
 });
 
-// Endpoint do aktualizacji statusu zadania
+
 app.patch('/api/todos/:id', (req, res) => {
   const { id } = req.params;
   const { completed } = req.body;
@@ -74,7 +71,6 @@ app.patch('/api/todos/:id', (req, res) => {
   });
 });
 
-// Endpoint do usuwania zadania
 app.delete('/api/todos/:id', (req, res) => {
   const { id } = req.params;
   const query = 'DELETE FROM todos WHERE id = ?';
@@ -94,7 +90,6 @@ app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-// Zdefiniuj port dla serwera
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Serwer działa na porcie ${PORT}`);
